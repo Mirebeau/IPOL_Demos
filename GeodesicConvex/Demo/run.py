@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 # Example input
-#./run.py 10. Elastica2 0.05 5 2
+#./run.py 10. 0 Elastica2 0.05 5 2
 
 # System imports
 import argparse
@@ -34,6 +34,7 @@ show=False # show some figures along execution, debug mode
 # Parse input arguments
 ap = argparse.ArgumentParser()
 ap.add_argument("xi", type=float)
+ap.add_argument("convex", type=int)
 ap.add_argument("model", type=str)
 ap.add_argument("_lambda", type=float)
 ap.add_argument("rho", type=float)
@@ -60,7 +61,7 @@ im = np.moveaxis(im,0,1)[:,::-1,:3] # ignore alpha channel, use cartesian coordi
 # ------- Eikonal solver preliminary setup ----------
 
 hfmIn = Eikonal.dictIn({
-    'model':args.model,
+    'model':("Convex"+args.model) if args.convex else args.model,
     'xi':args.xi,
     'cost':1,
     'dims':(*im.shape[:2],64),

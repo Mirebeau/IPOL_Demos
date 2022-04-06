@@ -14,11 +14,13 @@ More precisely:
 
 - The demoExtras file contains the Python code. On my machine it is generated as:
 `tar -cvf demoExtras.tar -C /Users/mirebeau/Dropbox/Programmes/Github/IPOL_Demos/GeodesicConvex/Demo run.py -C /Users/mirebeau/Dropbox/Programmes/Github/AdaptiveGridDiscretizations agd`
-- The HFM library is needed. For IPOL purposes, it has been compressed and is built on the IPOL servers
+- The HFM library is needed. For IPOL purposes, it has been compressed using the following command:
+`tar -cvf hfm.tar --exclude=build --exclude=.git --exclude=*.nb --exclude=__pycache__ -C /Users/mirebeau/Dropbox/Programmes/Github HamiltonFastMarching`
+-The HFM library is built on the IPOL servers, using the following part of the DDL file
         "build1":{
         "url": "https://mirebeau.github.io/IPOL_Demos/hfm.tar",
-        "move":"FileHFM_ReedsShepp2,FileHFM_ReedsSheppForward2,FileHFM_Elastica2,FileHFM_Dubins2,",
-        "construct":"cmake HamiltonFastMarching/Interfaces/FileHFM/ -DStandardModelNames:STRING='Elastica2;ReedsShepp2;ReedsSheppForward2;Dubins2' -DIncludeExperimentalModels:BOOL=FALSE -DCMAKE_BUILD_TYPE:BOOL=Release; make -j4"
+        "move":"FileHFM_ReedsSheppForward2,FileHFM_Elastica2,FileHFM_Dubins2,FileHFM_ConvexReedsSheppForward2,FileHFM_ConvexElastica2,FileHFM_ConvexDubins2",
+        "construct":"cmake HamiltonFastMarching/Interfaces/FileHFM/ -DStandardModelNames:STRING='Elastica2;ReedsSheppForward2;Dubins2;ConvexElastica2;ConvexReedsSheppForward2;ConvexDubins2' -DIncludeExperimentalModels:BOOL=FALSE -DCMAKE_BUILD_TYPE:BOOL=Release; make -j4"
         }
  Related reading : 
  https://stackoverflow.com/questions/34302265/does-cmake-build-type-release-imply-dndebug
