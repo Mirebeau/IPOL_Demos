@@ -1,0 +1,21 @@
+% To be load after algorithm2e
+% Provides the function \SetKwNamedIO, which is based on algorithm2e function \SetKwInput.
+% This function behaves similarly as \SetKwInput, but the first parameter of the created function will be the name of the input, and the second one its description
+%
+% The name of the variable will be written using the \DataSty style
+% TODO: create a specific style for this
+%
+% author: Quentin Bammey
+% quentin.bammey@ens-paris-saclay.fr
+%
+
+
+\newcommand{\SetKwNamedIO}[2]{%
+  \algocf@newcommand{#1}[2]{%
+    \sbox\algocf@inputbox{\hbox{\KwSty{#2\algocf@typo}~\DataSty{##1}\KwSty{:} }}%
+    \ifthenelse{\boolean{algocf@hanginginout}}{\relax}{\algocf@seteveryparhanging{\relax}}%
+    \ifthenelse{\boolean{algocf@inoutnumbered}}{\relax}{\algocf@seteveryparnl{\relax}}%
+    {\let\\\algocf@newinput\hangindent=\wd\algocf@inputbox\hangafter=1\unhbox\algocf@inputbox##2\par}%
+    \algocf@linesnumbered% reset the numbering of the lines
+    \ifthenelse{\boolean{algocf@hanginginout}}{\relax}{\algocf@reseteveryparhanging}%
+  }}%
